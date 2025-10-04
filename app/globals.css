@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@plugin "tailwindcss-motion";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-belleza: var(--font-belleza);
+  --font-inter: var(--font-inter);
+  --font-chivo: var(--font-chivo-regular);
+  --font-bitcount-single: var(--font-bitcount-single);
+  --font-bitcount-double: var(--font-bitcount-double);
+  --font-plus-jakarta-sans: var(--font-plus-jakarta-sans);
+  --font-pinyon-script: var(--font-pinyon-script);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body{
+  margin: 0;
+  padding: 0; 
+}
+
+.arial {
+  font-family: Arial, sans-serif;
+}
+
+
