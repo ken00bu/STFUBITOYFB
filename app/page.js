@@ -7,7 +7,7 @@ import wait from "@/lib/wait/wait";
 import { stagger } from "motion";
 
 export default function Home() {
-  const tulisan = [ 'l', 'o', '  ', 'n', 'g', 'e', 'n', 't', '*', 'd' ];
+  const tulisan = [ 's', "t", "f", "u", "b"];
   const [ renderH5, setRenderH5 ] = useState([]);
   const videoRef = useRef();
   const buttonRef = useRef();
@@ -18,10 +18,10 @@ export default function Home() {
 
 
   useGSAP(()=>{
-
+    
     const tl = gsap.timeline({repeat: -1});
     tl.to({}, {
-      duration: 0.08,
+      duration: 0.1,
       onComplete: async()=>{
         setFontInLetter((prev)=>{
           const randomFont = font[Math.floor(Math.random() * font.length)];
@@ -33,7 +33,11 @@ export default function Home() {
       }
     })
 
-     const tls = gsap.timeline({repeat: -1, repeatDelay: 0.1});
+     const tls = gsap.timeline({repeat: -1, repeatDelay: 0.1, yoyo: true, });
+      gsap.set(".word", {
+            scaleY: 2,
+            scaleX: 1.2,
+      })
         tls.to(".word", {
             scaleY: 2,
             scaleX: 1.2,
@@ -41,9 +45,9 @@ export default function Home() {
             ease: "expo",
             duration: 1,
       }).to(".word", {
-            scaleY: 1.7,
-            scaleX: 0.7,
-            filter: "blur(2px)",
+            scaleY: 7,
+            scaleX: 1.5,
+            filter: "blur(0px)",
             ease: "expo",
             duration: 1,
       })
@@ -87,23 +91,26 @@ export default function Home() {
   }
 
   function getRandomPosition() {
-  const side = Math.floor(Math.random() * 4);
-  let top, left;
-  if (side === 0) { // atas
-      top = Math.floor(Math.random() * 10);
-      left = Math.floor(Math.random() * 80) + 10;
-    } else if (side === 1) { // bawah
-      top = Math.floor(Math.random() * 10) + 90;
-      left = Math.floor(Math.random() * 80) + 10;
-    } else if (side === 2) { // kiri
-      left = Math.floor(Math.random() * 10);
-      top = Math.floor(Math.random() * 80) + 10;
-    } else { // kanan
-      left = Math.floor(Math.random() * 10) + 80;
-      top = Math.floor(Math.random() * 80) + 10;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const batasAtas = isMobile ? 30 : 10;
+    const batasBawah = isMobile ? 70 : 90;
+    const side = Math.floor(Math.random() * 4);
+    let top, left;
+    if (side === 0) { // atas
+        top = Math.floor(Math.random() * batasAtas);
+        left = Math.floor(Math.random() * 80) + 10;
+      } else if (side === 1) { // bawah
+        top = Math.floor(Math.random() * batasAtas) + batasBawah;
+        left = Math.floor(Math.random() * 80) + 10;
+      } else if (side === 2) { // kiri
+        left = Math.floor(Math.random() * 10);
+        top = Math.floor(Math.random() * 80) + 10;
+      } else { // kanan
+        left = Math.floor(Math.random() * 10) + 80;
+        top = Math.floor(Math.random() * 80) + 10;
+      }
+      return { top, left };
     }
-    return { top, left };
-  }
 
 
   useEffect(()=>{
@@ -123,7 +130,7 @@ export default function Home() {
           {renderH5.map((item, index)=>(
             
             <h5 key={index} 
-              className="text-white font-inter text-[10px] lg:text-[1rem] getridofmylife"
+              className="text-white font-inter text-[0.2rem] lg:text-[1rem] getridofmylife"
               style={{
                 position: 'absolute',
                 top: `${item.top}%`,
@@ -137,7 +144,7 @@ export default function Home() {
       </div>
       <video src="/STFUB.mp4" ref={videoRef} autoPlay loop playsInline className=" w-full h-[150vh] object-fill -z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></video>
       <div className="w-full min-h-[100dvh] flex flex-col justify-center items-center bg-black/40 ">
-          <h1 className={`text-white text-4xl lg:text-[13rem] flex gap-[-3px] items-center word`} >
+          <h1 className={`text-white text-4xl lg:text-[13rem] flex gap-1 items-center word`} >
             {tulisan.map((item, index)=>(
               <span key={index} className={`${fontInLetter[index]}`} >{item === '  ' ? '\u00A0' : item}</span>
             ))}
